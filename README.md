@@ -1,16 +1,34 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# EZTech Shopping Cart
 
-Currently, two official plugins are available:
+## Project Overview
+EZTech Shopping Cart is a web application created as part of our Information Technology Capstone Project. The goal is to provide a simple and user-friendly shopping experience where customers can browse products and subscriptions, add items to their cart, and see their total cost.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- Browse available products and subscription plans
+- Add items to the shopping cart
+- View the total cost of selected items
+- Select only one subscription plan at a time
+- Easy-to-use shopping cart interface
 
-## React Compiler
+## Technologies Used
+- React
+- JavaScript
+- HTML
+- CSS
+- Vite
+- GitHub
+- GitHub Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How to Use
+1. Open the shopping cart application.
+2. Browse the available products and subscriptions.
+3. Select the items you want.
+4. Review your shopping cart and total cost.
+5. Change your selections as needed.
 
-## Expanding the ESLint configuration
+## Project Purpose
+This project allowed our team to practice web development, problem-solving, and working with React. We focused on creating a functional application that is easy for customers to navigate.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development
+This application was developed for an academic team project and is hosted using GitHub Pages.
