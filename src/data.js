@@ -6,7 +6,7 @@ const list = [
           serviceInfo: "For one User",
           price: 4.99,
           
-img: "/images/basic.png",
+img: "/EZTech-Shopping-Cart/images/basic.png",
 
           amount: 1,
         },
@@ -16,7 +16,7 @@ img: "/images/basic.png",
           serviceInfo: "Share with Family",
           price: 9.99,
           
-img: "/images/gold.png",
+img: "/EZTech-Shopping-Cart/images/gold.png",
 
           amount: 1,
         },
@@ -26,7 +26,7 @@ img: "/images/gold.png",
           serviceInfo: "Share with the World",
           price: 12.99,
           
-img: "/images/premium.png",
+img: "/EZTech-Shopping-Cart/images/premium.png",
 
           amount: 1,
         },
@@ -36,7 +36,7 @@ img: "/images/premium.png",
           serviceInfo: "Share your list",
           price: 2.99,
           
-img: "/images/social.png",
+img: "/EZTech-Shopping-Cart/images/social.png",
 
           amount: 1,
         },
