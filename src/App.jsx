@@ -27,6 +27,17 @@ function App() {
   const [expiration, setExpiration] = useState("");
   const [cvv, setCvv] = useState("");
   const [orderComplete, setOrderComplete] = useState(false);
+  const [saveCard, setSaveCard] = useState(false);
+
+  const [savedCard, setSavedCard] = useState(() => {
+    try {
+      return JSON.parse(
+        localStorage.getItem("eztech-demo-payment") || "null"
+      );
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem("eztech-cart", JSON.stringify(cart));
@@ -110,6 +121,12 @@ function App() {
     return digits;
   };
 
+  const removeSavedCard = () => {
+    localStorage.removeItem("eztech-demo-payment");
+    setSavedCard(null);
+    setSaveCard(false);
+  };
+
   const handleCheckout = (event) => {
     event.preventDefault();
 
@@ -136,23 +153,30 @@ function App() {
       return;
     }
 
-    // Demo only: never store the full card number or CVV.
-    localStorage.setItem(
-      "eztech-demo-payment",
-      JSON.stringify({
+    // Demo only. Never save the full card number or CVV.
+    if (saveCard) {
+      const cardInfo = {
         cardholder: cardName,
         lastFour: digits.slice(-4),
         expiration,
-      })
-    );
+      };
+
+      localStorage.setItem(
+        "eztech-demo-payment",
+        JSON.stringify(cardInfo)
+      );
+
+      setSavedCard(cardInfo);
+    }
 
     setCardNumber("");
     setCvv("");
+    setSaveCard(false);
     setCart([]);
     setOrderComplete(true);
   };
 
-  // Require Google login before showing the application.
+  // Require Google login before opening the app.
   if (!isLoggedIn) {
     return (
       <div
@@ -270,6 +294,7 @@ function App() {
 
                   <div className="cart-details">
                     <h3>{item.service}</h3>
+
                     <p>
                       ${item.price.toFixed(2)} each
                     </p>
@@ -370,6 +395,50 @@ function App() {
                 to complete your demo checkout.
               </p>
 
+              {savedCard && (
+                <div
+                  style={{
+                    padding: "20px",
+                    margin: "20px auto",
+                    maxWidth: "450px",
+                    border: "1px solid #ccc",
+                    borderRadius: "10px",
+                    backgroundColor: "#f8f9fa",
+                    color: "#222",
+                  }}
+                >
+                  <h3>Saved Card</h3>
+
+                  <p>
+                    Cardholder: {savedCard.cardholder}
+                  </p>
+
+                  <p>
+                    Card Ending In: **** {savedCard.lastFour}
+                  </p>
+
+                  <p>
+                    Expiration: {savedCard.expiration}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={removeSavedCard}
+                    style={{
+                      padding: "10px 15px",
+                      marginTop: "10px",
+                      backgroundColor: "#b42318",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Remove Saved Card
+                  </button>
+                </div>
+              )}
+
               <div className="cart-total">
                 <h3>
                   Order Total: ${total.toFixed(2)}
@@ -395,7 +464,10 @@ function App() {
                     }
                     placeholder="Test Customer"
                     required
-                    style={{ width: "100%", padding: "12px" }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                    }}
                   />
                 </label>
 
@@ -413,7 +485,10 @@ function App() {
                     placeholder="1234 5678 9012 3456"
                     maxLength={19}
                     required
-                    style={{ width: "100%", padding: "12px" }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                    }}
                   />
                 </label>
 
@@ -431,7 +506,10 @@ function App() {
                     placeholder="MM/YY"
                     maxLength={5}
                     required
-                    style={{ width: "100%", padding: "12px" }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                    }}
                   />
                 </label>
 
@@ -451,8 +529,24 @@ function App() {
                     placeholder="CVV"
                     maxLength={4}
                     required
-                    style={{ width: "100%", padding: "12px" }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                    }}
                   />
+                </label>
+
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={saveCard}
+                    onChange={(e) =>
+                      setSaveCard(e.target.checked)
+                    }
+                  />
+                  {" "}
+                  Save my demo card information
+                  for future purchases
                 </label>
 
                 <button
@@ -502,3 +596,4 @@ function ProductCard({ product, addToCart }) {
 }
 
 export default App;
+
